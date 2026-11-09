@@ -5,7 +5,7 @@ import re
 import shutil
 import urllib.request
 
-base = 'https://koziavkamurz-wq.github.io/Nelora/'
+base = 'https://nuloraos.github.io/tweaks/'
 root = pathlib.Path('public')
 source = root / 'theipos'
 source.mkdir(parents=True, exist_ok=True)
@@ -30,14 +30,14 @@ for block in index.decode('utf8').split('\n\n'):
     destination = source / relative
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(data)
-for name in ['Release', 'Packages', 'Packages.gz', 'Packages.bz2', 'CydiaIcon.png']:
+for name in ['Release', 'Packages', 'Packages.gz', 'Packages.bz2', 'CydiaIcon.png', 'index.html', 'icon-camera.png', 'icon-dock.png', 'icon-motion.png', 'icon-glass.png']:
     (source / name).write_bytes(index if name == 'Packages' else read(name))
 release = (source / 'Release').read_text()
 for name in ['Packages', 'Packages.gz', 'Packages.bz2']:
     data = (source / name).read_bytes()
     if f' {hashlib.sha256(data).hexdigest()} {len(data)} {name}' not in release:
         raise ValueError('APT index integrity mismatch')
-# Same bytes at root and lowercase alias; no redirect, HTML, or client-side scripts are needed.
+# The old address shows the same single list and serves the same one-category APT source.
 for entry in source.iterdir():
     if entry.is_dir():
         shutil.copytree(entry, root / entry.name, dirs_exist_ok=True)
