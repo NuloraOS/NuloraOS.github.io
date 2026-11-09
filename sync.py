@@ -30,7 +30,7 @@ for block in index.decode('utf8').split('\n\n'):
     destination = source / relative
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(data)
-for name in ['Release', 'Packages', 'Packages.gz', 'Packages.bz2', 'CydiaIcon.png', 'index.html', 'icon-camera.png', 'icon-dock.png', 'icon-motion.png', 'icon-glass.png']:
+for name in ['Release', 'Packages', 'Packages.gz', 'Packages.bz2', 'CydiaIcon.png', 'index.html', 'icon-camera.png', 'icon-o2camera.png', 'icon-dock.png']:
     (source / name).write_bytes(index if name == 'Packages' else read(name))
 release = (source / 'Release').read_text()
 for name in ['Packages', 'Packages.gz', 'Packages.bz2']:
